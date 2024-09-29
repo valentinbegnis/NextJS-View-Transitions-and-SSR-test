@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import ArchetypeNavbar from "@/components/navbar/archetypes";
+import { ViewTransitions } from "next-view-transitions";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -24,12 +26,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
+    <ViewTransitions>
+      <html lang="en">
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          <div className="flex justify-items-center min-h-screen p-8 pb-20 gap-20 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+            <ArchetypeNavbar />
+            {children}
+          </div>
+        </body>
+      </html>
+    </ViewTransitions>
   );
 }

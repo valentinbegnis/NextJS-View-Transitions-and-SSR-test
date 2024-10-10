@@ -1,5 +1,5 @@
-import CardsList from "@/components/cards-list";
 import { Suspense } from "react";
+import CardsListServer from "@/components/cards-list-server";
 
 export default async function ArchetypeCardList({
   params,
@@ -32,7 +32,7 @@ export default async function ArchetypeCardList({
         </div>
       }
     >
-      <CardsList archetype={params.archetype} />
+      <CardsListServer archetype={params.archetype} />
     </Suspense>
   );
 }

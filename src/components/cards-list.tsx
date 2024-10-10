@@ -1,27 +1,16 @@
-import Image from "next/image";
-import AddToCart from "@/app/cards/[archetype]/add-to-cart";
-import { Link } from "next-view-transitions";
+'use client'
 
-interface ArchetypeCards {
-  data: {
-    id: number;
-    name: string;
-    card_images: {
-      image_url_small: string;
-    }[];
-  }[];
+import AddToCart from "@/app/cards/[archetype]/add-to-cart";
+import { ArchetypeCards } from "@/types";
+import { Link } from "next-view-transitions";
+import Image from "next/image";
+
+interface CardsList {
+  cards: ArchetypeCards;
+  archetype: string;
 }
 
-export default async function CardsList({ archetype }: { archetype: string }) {
-  const res = await fetch(
-    `https://db.ygoprodeck.com/api/v7/cardinfo.php?archetype=${archetype}`
-  );
-  const cards = (await res.json()) as ArchetypeCards | { error: string };
-
-  if ("error" in cards) {
-    return <p>Error: {cards.error}</p>;
-  }
-
+export default function CardsList({ cards, archetype }: CardsList) {
   return (
     <ul className="grid grid-cols-5 gap-6 w-full">
       {cards.data.map((card) => (
@@ -40,5 +29,5 @@ export default async function CardsList({ archetype }: { archetype: string }) {
         </li>
       ))}
     </ul>
-  );
+  )
 }
